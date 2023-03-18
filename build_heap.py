@@ -6,19 +6,17 @@ def build_heap(data):
     n = len(data)
     for i in range(n // 2, -1, -1):
         while 2 * i + 1 < n:
-            k = i
+            j = i
             leftChild = 2 * i + 1
             rightChild = 2 * i + 2
-            if leftChild <= n - 1 and data[leftChild] < data[k]:
-                k = leftChild
-            if rightChild <= n - 1 and data[rightChild] < data[k]:
-                k = rightChild
-            if i != k:
-                swaps.append((i, k))
-                c = data[i]
-                data[i] = data[k]
-                data[k] = c
-                i = k
+            if leftChild <= n - 1 and data[leftChild] < data[j]:
+                j = leftChild
+            if rightChild <= n - 1 and data[rightChild] < data[j]:
+                j = rightChild
+            if i != j:
+                swaps.append((i, j))
+                data[i],data[j] = data[j],data[i]
+                i = j
             else:
                 break
     return swaps

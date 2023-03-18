@@ -12,17 +12,34 @@ def build_heap(data):
 
 def main():
     
-    # TODO : add input and corresponding checks
-    # add another input for I or F 
-    # first two tests are from keyboard, third test is from a file
+    # Checks input method -> if I takes input from keyboard
+    #                     -> if F takes input from a file
+    input_method = input()
 
+    if input_method.__contains__("I"):
+        n = int(input())
+        data = list(map(int, input().split()))
+    
+    elif input_method.__contains__("F"):
+        file_name = input()
+        if file_name.__contains__("a"):
+            print("Input error")
+            return
+        try:
+            with open("test/" + file_name, "r") as f:
+                n = int(f.readline())
+                parents = list(map(int, f.readline().split()))
+        except FileNotFoundError:
+            print("File not found")
+            return
 
-    # input from keyboard
-    n = int(input())
-    data = list(map(int, input().split()))
+    else:
+        print("Input error")
+        return
+
 
     # checks if lenght of data is the same as the said lenght
-    assert len(data) == n
+    assert len(data) == n, "n doesn't match the number of elements input"
 
     # calls function to assess the data 
     # and give back all swaps

@@ -17,7 +17,7 @@ def build_heap(data):
                 swaps.append((i, k))
                 c = data[i]
                 data[i] = data[k]
-                data[i] = c
+                data[k] = c
                 i = k
             else:
                 break

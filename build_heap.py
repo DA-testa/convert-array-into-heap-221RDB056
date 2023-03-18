@@ -3,10 +3,24 @@
 
 def build_heap(data):
     swaps = []
-    # TODO: Creat heap and heap sort
-    # try to achieve  O(n) and not O(n2)
-
-
+    n = len(data)
+    for i in range(n // 2, -1, -1):
+        while 2 * i + 1 < n:
+            k = i
+            leftChild = 2 * i + 1
+            rightChild = 2 * i + 2
+            if leftChild <= n - 1 and data[leftChild] < data[k]:
+                k = leftChild
+            if rightChild <= n - 1 and data[rightChild] < data[k]:
+                k = rightChild
+            if i != k:
+                swaps.append((i, k))
+                c = data[i]
+                data[i] = data[k]
+                data[i] = c
+                i = k
+            else:
+                break
     return swaps
 
 
@@ -26,9 +40,9 @@ def main():
             print("Input error")
             return
         try:
-            with open("test/" + file_name, "r") as f:
+            with open("tests/" + file_name, "r") as f:
                 n = int(f.readline())
-                parents = list(map(int, f.readline().split()))
+                data = list(map(int, f.readline().split()))
         except FileNotFoundError:
             print("File not found")
             return
@@ -38,18 +52,14 @@ def main():
         return
 
 
-    # checks if lenght of data is the same as the said lenght
+    # Checks if lenght of data is the same as the said lenght
     assert len(data) == n, "n doesn't match the number of elements input"
 
-    # calls function to assess the data 
+    # Calls function to assess the data 
     # and give back all swaps
     swaps = build_heap(data)
 
-    # TODO: output how many swaps were made, 
-    # this number should be less than 4n (less than 4*len(data))
-
-
-    # output all swaps
+    # Prints the number of swaps and each swap
     print(len(swaps))
     for i, j in swaps:
         print(i, j)
